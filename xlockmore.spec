@@ -3,7 +3,7 @@ Summary(de):	Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
 Summary(fr):	Verrouillage de terminaux X
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
-Version:	4.17.2
+Version:	5.00
 Release:	1
 Copyright:	MIT
 Group:		X11/Amusements
@@ -12,14 +12,12 @@ Group(pl):	X11/Rozrywka
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
-Patch0:		%{name}-fortune.patch
-Patch1:		%{name}-Mesa.patch
-Patch2:		%{name}-X4.patch
-Patch3:		%{name}-sounds_path.patch
+Patch0:		%{name}-Mesa.patch
+Patch1:		%{name}-sounds_path.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 BuildRequires:	autoconf
 %{?sound:BuildRequires:	esound-devel}
-BuildRequires:	freetype-devel
+#BuildRequires:	freetype1-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	pam-devel
@@ -59,10 +57,8 @@ kurcalamalarýný önleyebilirsiniz.
 
 %prep
 %setup -q
-#%patch0 -p1
-%patch1 -p0
-%patch2 -p1
-%patch3 -p1
+%patch0 -p0
+%patch1 -p1
 
 %build
 autoconf
