@@ -24,7 +24,6 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	pam-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	xpm-devel
 Requires:	pam >= 0.67
 Requires:	/usr/games/fortune
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
