@@ -52,6 +52,12 @@ les autres utilisateurs d'aller dans une session X pendant que vous
 d'écran et attend que vous tapiez votre mot de passe, débloquant la
 session et vous redonnant accès à vos programmes X.
 
+%description -l pl
+xlockmore to rozszerzona wersja standardowego programu xlock,
+pozwalaj±cego zablokowaæ sesjê X tak, by by³a niedostêpna dla innych
+u¿ytkowników. Xlockmore uruchamia dostarczony wygaszacz ekranu do
+czasu wpisania has³a.
+
 %description -l tr
 Standart xlock programýnýn bir miktar geliþtirilmiþ sürümü. xlockmore
 ile makinanýn baþýndan ayrýlmanýz gerektiði zaman ekraný
