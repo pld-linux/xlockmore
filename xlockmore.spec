@@ -13,11 +13,10 @@ Source2:	xlockmore.desktop
 Patch0:		xlockmore-fortune.patch
 Patch1:		xlockmore-Mesa.patch
 Requires:	pam >= 0.67 /usr/games/fortune
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
-%define		_applnkdir	%{_datadir}/applnk
 
 %description
 The xlockmore utility is an enhanced version of the standard xlock
