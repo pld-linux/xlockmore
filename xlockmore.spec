@@ -24,8 +24,10 @@ BuildRequires:	pam-devel
 BuildRequires:	XFree86-devel
 Requires:	pam >= 0.67
 Requires:	/usr/games/fortune
+Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define 	_noautoreqdep	libGL.so.1 libGLU.so.1
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 
