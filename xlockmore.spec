@@ -1,3 +1,7 @@
+#
+# Conditional build:
+# _with_sound
+#
 Summary:	An X terminal locking program
 Summary(de):	Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
 Summary(fr):	Verrouillage de terminaux X
@@ -16,7 +20,7 @@ Patch1:		%{name}-sounds_path.patch
 Patch2:		%{name}-vtlock.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 BuildRequires:	autoconf
-%{?sound:BuildRequires:	esound-devel}
+%{?_with_sound:BuildRequires:	esound-devel}
 #BuildRequires:	freetype1-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	OpenGL-devel
@@ -76,9 +80,9 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 	--without-gtk \
 	--without-nas \
 	--disable-setuid \
-	%{!?sound:--without-rplay} \
-	%{!?sound:--without-esound} \
-	%{?sound:--with-esound} \
+	%{!?_with_sound:--without-rplay} \
+	%{!?_with_sound:--without-esound} \
+	%{?_with_sound:--with-esound} \
 	--enable-vtlock \
 	--enable-pam
 %{__make}
@@ -87,7 +91,7 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/} \
 	   $RPM_BUILD_ROOT{%{_mandir}/man1,%{_libdir}/X11/app-defaults/}
-%{?sound:install -d $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
+%{?_with_sound:install -d $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -99,7 +103,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements/
 
-%{?sound:install sounds/* $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
+%{?_with_sound:install sounds/* $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
 
 install xlock/xlock.man $RPM_BUILD_ROOT%{_mandir}/man1/
 install xlock/XLock.ad $RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/XLock
@@ -115,4 +119,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{_libdir}/X11/app-defaults/XLock
 %{_applnkdir}/Amusements/xlockmore.desktop
-%{?sound:%{_datadir}/sounds/%{name}}
+%{?_with_sound:%{_datadir}/sounds/%{name}}
