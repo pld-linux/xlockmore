@@ -1,24 +1,11 @@
-diff -Naur xlockmore-4.17.2-p/xlock/resource.c xlockmore-4.17.2/xlock/resource.c
---- xlockmore-4.17.2-p/xlock/resource.c	Mon Jul 10 17:54:13 2000
-+++ xlockmore-4.17.2/xlock/resource.c	Tue Oct 17 11:12:03 2000
-@@ -252,7 +252,7 @@
- #  endif /* !USE_VMSPLAY */
- #  ifdef USE_ESOUND
- #   ifndef DEFAULT_SOUND_DIR
--#    define DEFAULT_SOUND_DIR "/usr/share/sounds/xlockmore"
-+#    define DEFAULT_SOUND_DIR "/usr/X11R6/share/sounds/xlockmore"
- #   endif
- #   define DEF_LOCKSOUND 	"thank-you.au"
- #   define DEF_INFOSOUND	"identify-please.au"
-diff -Naur xlockmore-4.17.2-p/xlock/sound.c xlockmore-4.17.2/xlock/sound.c
---- xlockmore-4.17.2-p/xlock/sound.c	Mon Jun 26 21:05:45 2000
-+++ xlockmore-4.17.2/xlock/sound.c	Tue Oct 17 11:11:53 2000
-@@ -154,7 +154,7 @@
- #ifdef USE_ESOUND
- 
- #ifndef DEFAULT_SOUND_DIR
--#define DEFAULT_SOUND_DIR "/usr/share/sounds/xlockmore/"
-+#define DEFAULT_SOUND_DIR "/usr/X11R6/share/sounds/xlockmore/"
- #endif
- 
- #ifdef HAVE_LIBESD
+--- xlockmore-5.04/configure.in.orig	Thu Apr 25 03:43:15 2002
++++ xlockmore-5.04/configure.in	Mon Jul 15 10:55:34 2002
+@@ -2625,7 +2625,7 @@
+     sound=yes
+     AC_DEFINE(USE_ESOUND)
+     AC_DEFINE(HAVE_LIBESD)
+-    AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "${prefix}/lib/X11/xlock/sounds/")
++    AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "${prefix}/share/sounds/xlockmore/")
+     test "x$esound_config" = xNONE && esound_config=$ac_esound_config
+     test "x$esound_prefix" = xNONE && esound_prefix=$ac_esound_prefix
+     test "x$esound_includes" = xNONE && esound_includes=$ac_esound_includes
