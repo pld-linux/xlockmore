@@ -14,12 +14,12 @@ Summary(ru):	Программа локирования X терминала с множеством хранителей экрана
 Summary(tr):	X terminal kilitleme programЩ
 Summary(uk):	Програма локування X терм╕налу з великою к╕льк╕стю збер╕гач╕в екрану
 Name:		xlockmore
-Version:	5.06
+Version:	5.09
 Release:	1
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.bz2
-# Source0-md5:	66cde37496e22a3cc17ab72475597e4d
+# Source0-md5:	85fb0a483cb49a4b3f5c8cbf63af9b32
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-sounds_path.patch
@@ -42,6 +42,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
+%define		_soundsdir	/usr/share/sounds
 %define		__cxx		%{__cc}
 
 %description
@@ -120,23 +121,23 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/} \
-	   $RPM_BUILD_ROOT{%{_mandir}/man1,%{_libdir}/X11/app-defaults/}
-%{?_with_sound:install -d $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
+install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements} \
+	$RPM_BUILD_ROOT{%{_mandir}/man1,%{_libdir}/X11/app-defaults}
+%{?_with_sound:install -d $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	bindir=$RPM_BUILD_ROOT%{_bindir} \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
-	xapploaddir=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/
+	xapploaddir=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements/
+install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
 
-%{?_with_sound:install sounds/* $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
+%{?_with_sound:install sounds/* $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
 
-install xlock/xlock.man $RPM_BUILD_ROOT%{_mandir}/man1/
+install xlock/xlock.man $RPM_BUILD_ROOT%{_mandir}/man1
 install xlock/XLock.ad $RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/XLock
 
 %clean
@@ -150,4 +151,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{_libdir}/X11/app-defaults/XLock
 %{_applnkdir}/Amusements/xlockmore.desktop
-%{?_with_sound:%{_datadir}/sounds/%{name}}
+%{?_with_sound:%{_soundsdir}/%{name}}
