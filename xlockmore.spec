@@ -35,7 +35,6 @@ BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.0.2-79
 %{!?_without_opengl:Requires:	OpenGL}
-Requires:	fortune-mod
 Requires:	pam >= 0.77.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
