@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=xlock
+Comment=Screen Saver
+Exec=/usr/X11R6/bin/xlock -mode random
+Terminal=0
+Type=Application
