@@ -1,6 +1,6 @@
 Summary:	An X terminal locking program.
 Name:		xlockmore
-Version:	4.13.1
+Version:	4.15
 Release:	1
 Copyright:	MIT
 Group:		X11/Utilities
@@ -30,6 +30,8 @@ X sessions.
 %configure \
 	--without-motif \
 	--without-gtk \
+	--without-nas \
+	--disable-setuid \
 	--enable-pam
 make
 
@@ -39,6 +41,8 @@ install -d $RPM_BUILD_ROOT/etc/pam.d
 
 make install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
+	bindir=$RPM_BUILD_ROOT%{_bindir} \
+	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	xapploaddir=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
