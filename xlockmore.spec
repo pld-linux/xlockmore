@@ -70,7 +70,7 @@ export CXXFLAGS LDFLAGS
 	--without-nas \
 	--disable-setuid \
 	--enable-pam
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
