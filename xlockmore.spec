@@ -43,6 +43,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 %define		_soundsdir	/usr/share/sounds
+%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
 %define		__cxx		%{__cc}
 
 %description
@@ -122,23 +123,21 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements} \
-	$RPM_BUILD_ROOT{%{_mandir}/man1,%{_libdir}/X11/app-defaults}
+	$RPM_BUILD_ROOT{%{_mandir}/man1,%{_appdefsdir}}
 %{?_with_sound:install -d $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	bindir=$RPM_BUILD_ROOT%{_bindir} \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
-	xapploaddir=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults
+	xapploaddir=$RPM_BUILD_ROOT%{_appdefsdir} \
+	INSTPGMFLAGS="-m 755"
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
 
 %{?_with_sound:install sounds/* $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
-
-install xlock/xlock.man $RPM_BUILD_ROOT%{_mandir}/man1
-install xlock/XLock.ad $RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/XLock
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -149,6 +148,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/xlock
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
-%{_libdir}/X11/app-defaults/XLock
+%{_appdefsdir}/XLock
 %{_applnkdir}/Amusements/xlockmore.desktop
 %{?_with_sound:%{_soundsdir}/%{name}}
