@@ -1,11 +1,12 @@
 Summary:	An X terminal locking program
 Summary(de):	Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
 Summary(fr):	Verrouillage de terminaux X
+Summary(pl):	Program do blokowania X terminali
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
 Version:	5.00
 Release:	1
-Copyright:	MIT
+License:	MIT
 Group:		X11/Amusements
 Group(de):	X11/Unterhaltung
 Group(pl):	X11/Rozrywka
@@ -64,7 +65,7 @@ kurcalamalarýný önleyebilirsiniz.
 
 %build
 autoconf
-CXXFLAGS="%{!?debug:$RPM_OPT_FLAGS -fno-rtti -fno-exceptions -fno-implicit-templates}%{?debug:-O0 -g}"
+CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 %configure \
 	--without-motif \
 	--without-gtk \
