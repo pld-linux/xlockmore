@@ -5,7 +5,7 @@ Summary(pl):	Program do blokowania X terminali
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
 Version:	5.00
-Release:	4
+Release:	5
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
@@ -23,7 +23,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	pam-devel
 BuildRequires:	XFree86-devel
 Requires:	pam >= 0.67
-Requires:	/usr/games/fortune
+Requires:	fortune-mod
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -104,14 +104,12 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements/
 install xlock/xlock.man $RPM_BUILD_ROOT%{_mandir}/man1/
 install xlock/XLock.ad $RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/XLock
 
-gzip -9nf README docs/{TODO,Revisions}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/*gz *.gz
+%doc README docs/TODO docs/Revisions
 %attr(644,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/xlock
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
