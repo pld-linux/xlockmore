@@ -1,6 +1,8 @@
 #
 # Conditional build:
-# _with_sound
+# _with_sound		- with sound support
+# _without_freetype	- without True Type Font mode(s)
+# _without_opengl	- without OpenGL mode(s)
 #
 Summary:	An X terminal locking program
 Summary(de):	Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
@@ -8,28 +10,28 @@ Summary(fr):	Verrouillage de terminaux X
 Summary(pl):	Program do blokowania X terminali
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
-Version:	5.00
-Release:	6
+Version:	5.04
+Release:	1
 License:	MIT
 Group:		X11/Amusements
-Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.bz2
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
-Patch0:		%{name}-Mesa.patch
-Patch1:		%{name}-sounds_path.patch
+Patch0:		%{name}-sounds_path.patch
+Patch1:		%{name}-acfix.patch
 Patch2:		%{name}-vtlock.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
-BuildRequires:	OpenGL-devel
+%{!?_without_opengl:BuildRequires:	OpenGL-devel}
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 %{?_with_sound:BuildRequires:	esound-devel}
-#BuildRequires:	freetype1-devel
+%{!?_without_freetype:BuildRequires:	freetype1-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.0.2-79
-Requires:	pam >= 0.67
+%{!?_without_opengl:Requires:	OpenGL}
 Requires:	fortune-mod
-Requires:	OpenGL
+Requires:	pam >= 0.67
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -70,13 +72,14 @@ kurcalamalarýný önleyebilirsiniz.
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
-%configure2_13 \
+%{__autoconf}
+%configure \
 	--without-motif \
 	--without-gtk \
 	--without-nas \
@@ -84,6 +87,8 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 	%{!?_with_sound:--without-rplay} \
 	%{!?_with_sound:--without-esound} \
 	%{?_with_sound:--with-esound} \
+	%{?_without_freetype:--without-ttf} \
+	%{?_without_opengl:--without-opengl --without-mesa} \
 	--enable-vtlock \
 	--enable-pam
 %{__make}
