@@ -1,0 +1,24 @@
+diff -Naur xlockmore-4.17.2-p/xlock/resource.c xlockmore-4.17.2/xlock/resource.c
+--- xlockmore-4.17.2-p/xlock/resource.c	Mon Jul 10 17:54:13 2000
++++ xlockmore-4.17.2/xlock/resource.c	Tue Oct 17 11:12:03 2000
+@@ -252,7 +252,7 @@
+ #  endif /* !USE_VMSPLAY */
+ #  ifdef USE_ESOUND
+ #   ifndef DEFAULT_SOUND_DIR
+-#    define DEFAULT_SOUND_DIR "/usr/share/sounds/xlockmore"
++#    define DEFAULT_SOUND_DIR "/usr/X11R6/share/sounds/xlockmore"
+ #   endif
+ #   define DEF_LOCKSOUND 	"thank-you.au"
+ #   define DEF_INFOSOUND	"identify-please.au"
+diff -Naur xlockmore-4.17.2-p/xlock/sound.c xlockmore-4.17.2/xlock/sound.c
+--- xlockmore-4.17.2-p/xlock/sound.c	Mon Jun 26 21:05:45 2000
++++ xlockmore-4.17.2/xlock/sound.c	Tue Oct 17 11:11:53 2000
+@@ -154,7 +154,7 @@
+ #ifdef USE_ESOUND
+ 
+ #ifndef DEFAULT_SOUND_DIR
+-#define DEFAULT_SOUND_DIR "/usr/share/sounds/xlockmore/"
++#define DEFAULT_SOUND_DIR "/usr/X11R6/share/sounds/xlockmore/"
+ #endif
+ 
+ #ifdef HAVE_LIBESD

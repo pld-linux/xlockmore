@@ -1,20 +1,7 @@
---- xlockmore-4.16.1/xlock/xlock.c~	Thu Oct  5 15:34:30 2000
-+++ xlockmore-4.16.1/xlock/xlock.c	Thu Oct  5 15:31:02 2000
-@@ -592,9 +592,11 @@
- #ifdef USE_DPMS
- #define MIN_DPMS 30		/* 30 second minimum */
- #include <X11/extensions/dpms.h>
-+#if 0
- extern unsigned char DPMSQueryExtension(Display *, int *, int *);
- extern int  DPMSGetTimeouts(Display *, unsigned short *, unsigned short *, unsigned short *);
- extern int  DPMSSetTimeouts(Display *, unsigned short, unsigned short, unsigned short);
-+#endif
- extern int  dpmsstandby;
- extern int  dpmssuspend;
- extern int  dpmsoff;
---- xlockmore-4.16.1/configure.in~	Thu Oct  5 16:01:54 2000
-+++ xlockmore-4.16.1/configure.in	Thu Oct  5 20:41:27 2000
-@@ -2403,7 +2403,7 @@
+diff -Naur xlockmore-4.17.2/configure.in xlockmore-4.17.2-p/configure.in
+--- xlockmore-4.17.2/configure.in	Tue Oct 17 11:08:16 2000
++++ xlockmore-4.17.2-p/configure.in	Tue Oct 17 11:08:32 2000
+@@ -2116,7 +2116,7 @@
    AC_DEFINE(USE_DPMS)
  dnl test needed for Digital Unix machines
    if test "x$ac_dpms_libraries" != xNONE; then
