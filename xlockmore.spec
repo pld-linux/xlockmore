@@ -6,7 +6,8 @@ Copyright:	MIT
 Group:		X11/Utilities
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/xlockmore-%{version}.tar.gz
 Source1:	xlock.pamd
-Patch:		xlockmore-3.13-fortune.patch
+Patch0:		xlockmore-3.13-fortune.patch
+Patch1:		xlockmore-Mesa.patch
 Requires:	pam >= 0.67 /usr/games/fortune
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -24,9 +25,11 @@ X sessions.
 
 %prep
 %setup -q
-#%patch -p1
+#%patch0 -p1
+%patch1 -p0
 
 %build
+autoconf
 %configure \
 	--without-motif \
 	--without-gtk \
