@@ -102,6 +102,7 @@ kurcalamalarýný önleyebilirsiniz.
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
+%{__libtoolize}
 %{__autoconf}
 %configure \
 	--without-motif \
