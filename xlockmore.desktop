@@ -7,5 +7,5 @@ Exec=/usr/X11R6/bin/xlock -mode random
 Icon=gnome-lockscreen.png
 Terminal=false
 Type=Application
-Categories=Amusement;
+Categories=Screensaver;
 # vi: encoding=utf-8
