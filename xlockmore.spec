@@ -19,6 +19,7 @@ Release:	1
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.bz2
+# Source0-md5:	66cde37496e22a3cc17ab72475597e4d
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-sounds_path.patch
