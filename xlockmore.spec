@@ -31,6 +31,7 @@ BuildRequires:	autoconf
 %{?_with_sound:BuildRequires:	esound-devel}
 %{!?_without_freetype:BuildRequires:	freetype1-devel}
 BuildRequires:	gcc-c++
+BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.0.2-79
 %{!?_without_opengl:Requires:	OpenGL}
