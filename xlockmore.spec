@@ -15,7 +15,7 @@ Summary(tr):	X terminal kilitleme programЩ
 Summary(uk):	Програма локування X терм╕налу з великою к╕льк╕стю збер╕гач╕в екрану
 Name:		xlockmore
 Version:	5.10
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.bz2
@@ -121,7 +121,7 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements} \
+install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_desktopdir}} \
 	$RPM_BUILD_ROOT{%{_mandir}/man1,%{_appdefsdir}}
 %{?with_sound:install -d $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
 
@@ -134,7 +134,7 @@ install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements} \
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 
 %{?with_sound:install sounds/* $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
 
@@ -148,5 +148,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
 %{_appdefsdir}/XLock
-%{_applnkdir}/Amusements/xlockmore.desktop
+%{_desktopdir}/xlockmore.desktop
 %{?with_sound:%{_soundsdir}/%{name}}
