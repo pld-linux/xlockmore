@@ -1,10 +1,6 @@
-
-This patch makes xlock's "-vtlock" options work on PLD.
-This needs xlock made suid-root, which is not done in the package.
-
-diff -durN xlockmore-5.00.orig/xlock/vtlock.c xlockmore-5.00/xlock/vtlock.c
---- xlockmore-5.00.orig/xlock/vtlock.c	Mon Dec 11 23:56:10 2000
-+++ xlockmore-5.00/xlock/vtlock.c	Tue Apr  2 10:11:32 2002
+diff -Nur xlockmore-5.04.orig/xlock/vtlock.c xlockmore-5.04/xlock/vtlock.c
+--- xlockmore-5.04.orig/xlock/vtlock.c	Mon Dec 11 23:56:10 2000
++++ xlockmore-5.04/xlock/vtlock.c	Mon Jul 15 14:44:53 2002
 @@ -108,8 +108,6 @@
          int         consfd = -1;
          struct stat consstat;
@@ -14,15 +10,166 @@ diff -durN xlockmore-5.00.orig/xlock/vtlock.c xlockmore-5.00/xlock/vtlock.c
          /* Open console */
          if ((consfd = open(CONSOLE, O_RDWR)) == -1) return;
  
-diff -durN xlockmore-5.00.orig/xlock/vtlock_proc.c xlockmore-5.00/xlock/vtlock_proc.c
---- xlockmore-5.00.orig/xlock/vtlock_proc.c	Mon Dec 11 23:55:54 2000
-+++ xlockmore-5.00/xlock/vtlock_proc.c	Tue Apr  2 10:11:17 2002
-@@ -50,7 +50,7 @@
+diff -Nur xlockmore-5.04.orig/xlock/vtlock_proc.c xlockmore-5.04/xlock/vtlock_proc.c
+--- xlockmore-5.04.orig/xlock/vtlock_proc.c	Sun May 27 00:01:21 2001
++++ xlockmore-5.04/xlock/vtlock_proc.c	Mon Jul 15 14:53:07 2002
+@@ -46,7 +46,7 @@
  #define CONSOLE 	DEVDIR "/console"
  #define BASEVTNAME	DEVDIR "/tty%d"
  #define XPATH 		"/usr/X11R6/bin" /* default path of X server */
 -#define XNAME 		"X"		 /* X server name : mandatory ! */
-+#define XNAME 		"Xwrapper"	 /* X server name : mandatory ! */
++#define XNAME 		"XFree86"	 /* X server name : mandatory ! */
  #define MAX_VT		20
  #else
  #error Sorry ! You must adapt this file to your system !
+@@ -59,8 +59,7 @@
+ };
+ 
+ /* Static variables used to keep X device, inode and process */
+-static dev_t xdev =(dev_t)-1;
+-static ino_t xino =(ino_t)-1;
++static char *xpath = NULL;
+ static pid_t xproc =(pid_t)-1;
+ static unsigned short xvt =(unsigned short)0;
+ static unsigned short othervt =(unsigned short)0;
+@@ -71,9 +70,8 @@
+ 
+ /* Prototypes */
+ static unsigned short get_active_vt(void);
+-static ino_t find_x(const char *, const char *, dev_t * );
+ static int proc_dir_select(const struct dirent *);
+-static pid_t find_x_proc(int, dev_t, ino_t);
++static pid_t find_x_proc(int, const char *);
+ static int find_tty_inodes(struct inode_ref *);
+ static int scan_x_fds(struct inode_ref *, int, pid_t);
+ 
+@@ -111,48 +109,6 @@
+ }
+ 
+ /*
+- * find_x
+- * ------
+- * Find X server executable file inode.
+- * The inode number found here will be used to find in the X process
+- * in the proc fs.
+- */
+-static ino_t
+-find_x(const  char *path, const char *name, dev_t *pxdev )
+-{
+-    struct stat stbuf;
+-    char xpath[MAXPATHLEN+1];
+-
+-    (void) sprintf( xpath, "%s/%s", path, name );
+-    if ( stat( xpath, &stbuf ) != -1 ) {
+-        (void) strcpy( xpath, name );
+-        while ( S_ISLNK(stbuf.st_mode) ) {
+-            char buf[MAXPATHLEN+1];
+-
+-            if (readlink(xpath, buf, MAXPATHLEN ) == -1 || ! *buf)
+-                return( (ino_t) -1 );
+-
+-            /*
+-	     * Let's try to know if the path is absolute or relative
+-             * It is absolute if it begin with '/',
+-             * else is relative ,
+-	     * then we need to add the path given as argument
+-	     */
+-            if ( buf[0] != '/' )
+-              (void) sprintf( xpath, "%s/%s", path, buf );
+-            else
+-              (void) strcpy( xpath, buf );
+-            /* Stat linked file */
+-            if ( stat( xpath, &stbuf ) == -1 ) return( (ino_t) -1 );
+-        }
+-    }
+-    else
+-      return( (ino_t) -1 );
+-    if ( pxdev ) *pxdev = stbuf.st_dev;
+-    return stbuf.st_ino;
+-}
+-
+-/*
+  * proc_dir_select
+  * ---------------
+  * Callback called for each proc fs dir in order to select all
+@@ -172,7 +128,7 @@
+  * for the given display, knowing the X server file inode and device.
+  */
+ static pid_t
+-find_x_proc(int disp_nr, dev_t lxdev, ino_t lxino)
++find_x_proc(int disp_nr, const char *lxpath)
+ {
+     /*static*/ char xdisp[10];
+     /*static*/ char xcmd_ref[MAXPATHLEN+1];
+@@ -183,9 +139,9 @@
+     int lencmd ;
+ 
+     /* These are the display string searched in X cmd running (e.g.: :1) */
+-    /* and the searched  value of the link (e.g.: "[0301]:286753") */
++    /* and the searched  value of the link (full path) */
+     (void) sprintf( xdisp, ":%d", disp_nr );
+-    (void) sprintf( xcmd_ref, "[%04x]:%ld", (int)lxdev, (long)lxino );
++    (void) sprintf( xcmd_ref, "%s", lxpath );
+     lencmd = strlen(xcmd_ref);
+     if ( stat( PROCDIR, &stbuf ) == -1 ) return( (pid_t)-1 );
+     namelist = (struct dirent **) malloc(sizeof (struct dirent *));
+@@ -281,7 +237,7 @@
+         if ( stat( name, &stbuf ) == -1 )
+           continue;
+         inotab[ln_ttys].n = ix;
+-        (void) sprintf( inotab[ln_ttys].ref, "[%04x]:%ld", (int)stbuf.st_dev, stbuf.st_ino );
++        (void) sprintf( inotab[ln_ttys].ref, "%s", name );
+         ln_ttys++;
+     }
+     return ln_ttys;
+@@ -313,6 +269,11 @@
+         int ix;
+ 
+         (void) sprintf( linkname, "%s/%s", xfddir, namelist[curn]->d_name );
++	if ( atoi( namelist[curn]->d_name ) < 3) {
++	    /* stderr usually points to console X server was run from... */
++	    curn++;
++	    continue;
++	}
+         if ( stat( linkname, &stbuf ) == -1 ) {
+             /* If cannot stat it, just discard it */
+             curn++;
+@@ -330,7 +291,7 @@
+             }
+             for ( ix = 0; ix < ln_ttys; ix++ )
+ 	    {
+-              if ( !strncmp( linkref, inotab[ix].ref, strlen( inotab[ix].ref ) ) )
++              if ( !strcmp( linkref, inotab[ix].ref ) )
+               {
+       		(void) free((void *) namelist);
+                 return inotab[ix].n;
+@@ -361,23 +322,14 @@
+ 
+     /* The active VT */
+     active_vt = get_active_vt();
+-    if ( xino == (ino_t)-1 )
+-      if (stat( XPATH, &stbuf ) == -1 ||
+-          (xino = find_x( XPATH, XNAME, &xdev )) == (ino_t)-1 ) {
++    if ( xpath == NULL )
++      if (stat( XPATH "/" XNAME, &stbuf ) == -1) {
+           /* No executable at the default location */
+-          /* Let's try with $PATH */
+-          if ( !path ) return -1;
+-          envtokenizer = strtok( path, ":" );
+-          while ( envtokenizer ) {
+-              if ( stat( envtokenizer, &stbuf ) != -1 )
+-                if ( ( xino = find_x( envtokenizer, XNAME, &xdev ) ) != (ino_t)-1 )
+-                  break;
+-              envtokenizer = strtok( (char *)NULL, ":" );
+-          }
+-          if ( !envtokenizer ) return -1;
+-      }
++	   return -1;
++      } else
++	xpath = strdup(XPATH "/" XNAME);
+     if ((xproc ==(pid_t)-1 ) &&
+-        (xproc = find_x_proc(display_nr, xdev, xino)) == (pid_t)-1)
++        (xproc = find_x_proc(display_nr, xpath)) == (pid_t)-1)
+       return -1;
+     if ((n_ttys == -1) &&
+         (n_ttys = find_tty_inodes(ttyinodes))== 0)
