@@ -15,7 +15,7 @@ Summary(tr):	X terminal kilitleme programЩ
 Summary(uk):	Програма локування X терм╕налу з великою к╕льк╕стю збер╕гач╕в екрану
 Name:		xlockmore
 Version:	5.12
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.bz2
