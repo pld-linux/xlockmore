@@ -1,0 +1,14 @@
+--- xlockmore-4.16.1/xlock/xlock.c~	Thu Oct  5 15:34:30 2000
++++ xlockmore-4.16.1/xlock/xlock.c	Thu Oct  5 15:31:02 2000
+@@ -592,9 +592,11 @@
+ #ifdef USE_DPMS
+ #define MIN_DPMS 30		/* 30 second minimum */
+ #include <X11/extensions/dpms.h>
++#if 0
+ extern unsigned char DPMSQueryExtension(Display *, int *, int *);
+ extern int  DPMSGetTimeouts(Display *, unsigned short *, unsigned short *, unsigned short *);
+ extern int  DPMSSetTimeouts(Display *, unsigned short, unsigned short, unsigned short);
++#endif
+ extern int  dpmsstandby;
+ extern int  dpmssuspend;
+ extern int  dpmsoff;
