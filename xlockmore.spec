@@ -13,6 +13,7 @@ Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-Mesa.patch
 Patch1:		%{name}-sounds_path.patch
+Patch2:		%{name}-vtlock.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 BuildRequires:	autoconf
 %{?sound:BuildRequires:	esound-devel}
@@ -66,6 +67,7 @@ kurcalamalarýný önleyebilirsiniz.
 %setup -q
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
@@ -77,12 +79,14 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 	%{!?sound:--without-rplay} \
 	%{!?sound:--without-esound} \
 	%{?sound:--with-esound} \
+	--enable-vtlock \
 	--enable-pam
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/}
+install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/} \
+	   $RPM_BUILD_ROOT{%{_mandir}/man1,%{_libdir}/X11/app-defaults/}
 %{?sound:install -d $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
 
 %{__make} install \
@@ -93,18 +97,21 @@ install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
+install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements/
 
 %{?sound:install sounds/* $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
 
-gzip -9nf docs/{TODO,Revisions}
+install xlock/xlock.man $RPM_BUILD_ROOT%{_mandir}/man1/
+install xlock/XLock.ad $RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/XLock
+
+gzip -9nf README docs/{TODO,Revisions}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/*gz
+%doc docs/*gz *.gz
 %attr(644,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/xlock
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
