@@ -6,9 +6,13 @@
 #
 Summary:	An X terminal locking program
 Summary(de):	Terminal-Sperrprogramm fЭr X mit vielen Bildschirmschonern
+Summary(es):	Programa para bloquear el terminal X con varios protectores de pantalla
 Summary(fr):	Verrouillage de terminaux X
 Summary(pl):	Program do blokowania X terminali
+Summary(pt_BR):	Programa para bloquear o terminal X com vАrios salvadores de tela
+Summary(ru):	Программа локирования X терминала с множеством хранителей экрана
 Summary(tr):	X terminal kilitleme programЩ
+Summary(uk):	Програма локування X терм╕налу з великою к╕льк╕стю збер╕гач╕в екрану
 Name:		xlockmore
 Version:	5.04
 Release:	1
@@ -52,6 +56,12 @@ Ihrem Rechner befinden. Es fЭhrt einen von vielen Bildschirmschonern
 aus und wartet auf die Eingabe eines Paъworts, bevor es die Sitzung
 freigibt und Sie an Ihre X-Programme lДъt.
 
+%description -l es
+Una versiСn mejorada del xlock que te permite mantener otros usuarios
+lejos de tu sesiСn X mientras estАs alejado de la mАquina. Se ejecuta
+en uno de los varios protectores de pantalla mientras aguarda que
+entres con tu contraseЯa, desbloqueando la sesiСn y volviendo al X.
+
 %description -l fr
 Version amИliorИe du programme xlock standard et qui permet d'empЙcher
 les autres utilisateurs d'aller dans une session X pendant que vous
@@ -64,6 +74,19 @@ xlockmore to rozszerzona wersja standardowego programu xlock,
 pozwalaj╠cego zablokowaФ sesjЙ X tak, by byЁa niedostЙpna dla innych
 u©ytkownikСw. Xlockmore uruchamia dostarczony wygaszacz ekranu do
 czasu wpisania hasЁa.
+
+%description -l pt_BR
+Uma versЦo melhorada do xlock que permite a vocЙ manter outros
+usuАrios longe de sua sessЦo X enquanto vocЙ estА afastado da mАquina.
+Ele roda um dos vАrios protetores de tela enquanto aguarda vocЙ entrar
+com a sua senha, desbloqueando a sessЦo e voltando ao X.
+
+%description -l ru
+Улучшенная версия стандартной программы xlock, позволяющей закрыть
+X-сессию от других пользователей когда вы вдали от своей машины. Она
+запускает один из множества входящих в ее комплект скринсейверов и
+ждет пока не будет введен правильный пароль, по которому X-сессия
+опять открывается и пускает вас к вашим X-программам.
 
 %description -l tr
 Standart xlock programЩnЩn bir miktar geliЧtirilmiЧ sЭrЭmЭ. xlockmore
