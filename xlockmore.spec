@@ -4,7 +4,7 @@ Summary(fr):	Verrouillage de terminaux X
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
 Version:	4.16.1
-Release:	1
+Release:	2
 Copyright:	MIT
 Group:		X11/Amusements
 Group(pl):	X11/Rozrywka
