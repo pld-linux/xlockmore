@@ -7,12 +7,13 @@ Version:	4.16.1
 Release:	4
 Copyright:	MIT
 Group:		X11/Amusements
+Group(de):	X11/Unterhaltung
 Group(pl):	X11/Rozrywka
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
 Source1:	xlock.pamd
-Source2:	xlockmore.desktop
-Patch0:		xlockmore-fortune.patch
-Patch1:		xlockmore-Mesa.patch
+Source2:	%{name}.desktop
+Patch0:		%{name}-fortune.patch
+Patch1:		%{name}-Mesa.patch
 Patch2:		%{name}-X4.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 BuildRequires:	esound-devel
@@ -63,9 +64,7 @@ kurcalamalarýný önleyebilirsiniz.
 
 %build
 autoconf
-CXXFLAGS="$RPM_OPT_FLAGS -fno-rtti -fno-exceptions -fno-implicit-templates"
-LDFLAGS="-s"
-export CXXFLAGS LDFLAGS
+CXXFLAGS="%{!?debug:$RPM_OPT_FLAGS -fno-rtti -fno-exceptions -fno-implicit-templates}%{?debug:-O -g}"
 %configure \
 	--without-motif \
 	--without-gtk \
@@ -84,14 +83,11 @@ install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/}
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	xapploaddir=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/
 
-strip $RPM_BUILD_ROOT%{_bindir}/xlock
-
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
-	docs/{TODO,Revisions}
+gzip -9nf docs/{TODO,Revisions}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
