@@ -1,16 +1,22 @@
-diff -Nru xlockmore-5.00.orig/xlock/XLock.ad xlockmore-5.00/xlock/XLock.ad
---- xlockmore-5.00.orig/xlock/XLock.ad	Mon Dec  4 15:29:37 2000
-+++ xlockmore-5.00/xlock/XLock.ad	Wed May 15 13:03:15 2002
-@@ -56,9 +56,9 @@
+--- xlockmore-3.13/xlock.h.fortune	Sun Dec  1 23:11:26 1996
++++ xlockmore-3.13/xlock.h	Tue Feb 11 14:28:11 1997
+@@ -48,7 +48,7 @@
+ #define DEF_MFONT "-*-times-*-*-*-*-18-*-*-*-*-*-*-*"
+ #endif
+ #ifndef DEF_PROGRAM		/* Try the -o option ;) */
+-#define DEF_PROGRAM "fortune -s"
++#define DEF_PROGRAM "/usr/games/fortune -s"
+ #endif
+ 
+ #define DEF_ICONW             64	/* Age old default */
+--- xlockmore-3.13/XLock.ad.fortune	Tue Feb 11 14:34:13 1997
++++ xlockmore-3.13/XLock.ad	Tue Feb 11 14:34:27 1997
+@@ -46,7 +46,7 @@
+ 
+ ! For marquee & nose modes
  !XLock.program: fortune -o
- XLock.program: fortune -s
+-XLock.program: fortune -s
++XLock.program: /usr/games/fortune -s
  !XLock.program: fortune
--!XLock.program: /usr/games/fortune -o
--!XLock.program: /usr/games/fortune -s
--!XLock.program: /usr/games/fortune
-+!XLock.program: /usr/bin/fortune -o
-+!XLock.program: /usr/bin/fortune -s
-+!XLock.program: /usr/bin/fortune
  !XLock.program: finger
  !XLock.messagesfile: fortune.dat
- !XLock.messagefile: /etc/hosts
