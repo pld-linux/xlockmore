@@ -3,16 +3,26 @@ Summary(de):	Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
 Summary(fr):	Verrouillage de terminaux X
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
-Version:	4.15
-Release:	3
+Version:	4.16.1
+Release:	1
 Copyright:	MIT
-Group:		X11/Utilities
-Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/xlockmore-%{version}.tar.gz
+Group:		X11/Amusements
+Group(pl):	X11/Rozrywka
+Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
 Source1:	xlock.pamd
 Source2:	xlockmore.desktop
 Patch0:		xlockmore-fortune.patch
 Patch1:		xlockmore-Mesa.patch
-Requires:	pam >= 0.67 /usr/games/fortune
+URL:		http://www.tux.org/~bagleyd/xlockmore.html
+BuildRequires:	esound-devel
+BuildRequires:	freetype-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	OpenGL-devel
+BuildRequires:	pam-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	xpm-devel
+Requires:	pam >= 0.67
+Requires:	/usr/games/fortune
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -26,22 +36,23 @@ in your password.
 
 %description -l de
 Eine erweiterte Version des Standardprogramms xlock, mit dem Sie eine
-X-Sitzung für andere Benutzer sperren können, wenn Sie sich nicht an Ihrem
-Rechner befinden. Es führt einen von vielen Bildschirmschonern aus und
-wartet auf die Eingabe eines Paßworts, bevor es die Sitzung freigibt und Sie
-an Ihre X-Programme läßt.
+X-Sitzung für andere Benutzer sperren können, wenn Sie sich nicht an
+Ihrem Rechner befinden. Es führt einen von vielen Bildschirmschonern
+aus und wartet auf die Eingabe eines Paßworts, bevor es die Sitzung
+freigibt und Sie an Ihre X-Programme läßt.
 
 %description -l fr
-Version améliorée du programme xlock standard et qui permet d'empêcher les
-autres utilisateurs d'aller dans une session X pendant que vous êtes éloigné
-de la machine. Il lance l'un des nombreux économiseurs d'écran et attend que
-vous tapiez votre mot de passe, débloquant la session et vous redonnant
-accès à vos programmes X.
+Version améliorée du programme xlock standard et qui permet d'empêcher
+les autres utilisateurs d'aller dans une session X pendant que vous
+êtes éloigné de la machine. Il lance l'un des nombreux économiseurs
+d'écran et attend que vous tapiez votre mot de passe, débloquant la
+session et vous redonnant accès à vos programmes X.
 
 %description -l tr
-Standart xlock programýnýn bir miktar geliþtirilmiþ sürümü. xlockmore ile
-makinanýn baþýndan ayrýlmanýz gerektiði zaman ekraný kilitleyebilir, böylece
-istenmeyen misafirlerin sistemi kurcalamalarýný önleyebilirsiniz.
+Standart xlock programýnýn bir miktar geliþtirilmiþ sürümü. xlockmore
+ile makinanýn baþýndan ayrýlmanýz gerektiði zaman ekraný
+kilitleyebilir, böylece istenmeyen misafirlerin sistemi
+kurcalamalarýný önleyebilirsiniz.
 
 %prep
 %setup -q
@@ -50,7 +61,9 @@ istenmeyen misafirlerin sistemi kurcalamalarýný önleyebilirsiniz.
 
 %build
 autoconf
-LDFLAGS="-s"; export LDFLAGS
+CXXFLAGS="$RPM_OPT_FLAGS -fno-rtti -fno-exceptions -fno-implicit-templates"
+LDFLAGS="-s"
+export CXXFLAGS LDFLAGS
 %configure \
 	--without-motif \
 	--without-gtk \
@@ -69,15 +82,21 @@ make install \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	xapploaddir=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/
 
+strip $RPM_BUILD_ROOT%{_bindir}/xlock
+
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
+	docs/{TODO,Revisions}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc docs/*gz
 %attr(644,root,root) %config %verify(not size mtime md5) /etc/pam.d/xlock
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
