@@ -4,7 +4,7 @@ Summary(fr):	Verrouillage de terminaux X
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
 Version:	4.16.1
-Release:	3
+Release:	4
 Copyright:	MIT
 Group:		X11/Amusements
 Group(pl):	X11/Rozrywka
@@ -13,6 +13,7 @@ Source1:	xlock.pamd
 Source2:	xlockmore.desktop
 Patch0:		xlockmore-fortune.patch
 Patch1:		xlockmore-Mesa.patch
+Patch2:		%{name}-X4.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 BuildRequires:	esound-devel
 BuildRequires:	freetype-devel
@@ -58,6 +59,7 @@ kurcalamalarýný önleyebilirsiniz.
 %setup -q
 #%patch0 -p1
 %patch1 -p0
+%patch2 -p0
 
 %build
 autoconf
