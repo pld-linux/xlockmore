@@ -16,6 +16,7 @@ Patch0:		%{name}-fortune.patch
 Patch1:		%{name}-Mesa.patch
 Patch2:		%{name}-X4.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
+BuildRequires:	autoconf
 BuildRequires:	esound-devel
 BuildRequires:	freetype-devel
 BuildRequires:	libstdc++-devel
