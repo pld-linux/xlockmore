@@ -1,0 +1,28 @@
+
+This patch makes xlock's "-vtlock" options work on PLD.
+This needs xlock made suid-root, which is not done in the package.
+
+diff -durN xlockmore-5.00.orig/xlock/vtlock.c xlockmore-5.00/xlock/vtlock.c
+--- xlockmore-5.00.orig/xlock/vtlock.c	Mon Dec 11 23:56:10 2000
++++ xlockmore-5.00/xlock/vtlock.c	Tue Apr  2 10:11:32 2002
+@@ -108,8 +108,6 @@
+         int         consfd = -1;
+         struct stat consstat;
+ 
+-        if (stat(CONSOLE, &consstat) == -1 || ruid != consstat.st_uid) return;
+-
+         /* Open console */
+         if ((consfd = open(CONSOLE, O_RDWR)) == -1) return;
+ 
+diff -durN xlockmore-5.00.orig/xlock/vtlock_proc.c xlockmore-5.00/xlock/vtlock_proc.c
+--- xlockmore-5.00.orig/xlock/vtlock_proc.c	Mon Dec 11 23:55:54 2000
++++ xlockmore-5.00/xlock/vtlock_proc.c	Tue Apr  2 10:11:17 2002
+@@ -50,7 +50,7 @@
+ #define CONSOLE 	DEVDIR "/console"
+ #define BASEVTNAME	DEVDIR "/tty%d"
+ #define XPATH 		"/usr/X11R6/bin" /* default path of X server */
+-#define XNAME 		"X"		 /* X server name : mandatory ! */
++#define XNAME 		"Xwrapper"	 /* X server name : mandatory ! */
+ #define MAX_VT		20
+ #else
+ #error Sorry ! You must adapt this file to your system !
