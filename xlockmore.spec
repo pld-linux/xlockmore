@@ -5,7 +5,7 @@ Summary(pl):	Program do blokowania X terminali
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
 Version:	5.00
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Amusements
 Group(de):	X11/Unterhaltung
@@ -64,9 +64,8 @@ kurcalamalarýný önleyebilirsiniz.
 %patch1 -p1
 
 %build
-autoconf
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
-%configure \
+%configure2_13 \
 	--without-motif \
 	--without-gtk \
 	--without-nas \
