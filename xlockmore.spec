@@ -1,8 +1,8 @@
 #
 # Conditional build:
-# _with_sound		- with sound support
-# _without_freetype	- without True Type Font mode(s)
-# _without_opengl	- without OpenGL mode(s)
+%bcond_with	sound	# with sound support
+%bcond_without	freetype	# without True Type Font mode(s)
+%bcond_without	opengl	# without OpenGL mode(s)
 #
 Summary:	An X terminal locking program
 Summary(de):	Terminal-Sperrprogramm fЭr X mit vielen Bildschirmschonern
@@ -14,27 +14,27 @@ Summary(ru):	Программа локирования X терминала с множеством хранителей экрана
 Summary(tr):	X terminal kilitleme programЩ
 Summary(uk):	Програма локування X терм╕налу з великою к╕льк╕стю збер╕гач╕в екрану
 Name:		xlockmore
-Version:	5.09
-Release:	2
+Version:	5.10
+Release:	1
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.bz2
-# Source0-md5:	85fb0a483cb49a4b3f5c8cbf63af9b32
+# Source0-md5:	d9ce37326e3575fc7df9a682581fddfc
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-sounds_path.patch
 Patch1:		%{name}-vtlock.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
-%{!?_without_opengl:BuildRequires:	OpenGL-devel}
+%{?with_opengl:BuildRequires:	OpenGL-devel}
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
-%{?_with_sound:BuildRequires:	esound-devel}
-%{!?_without_freetype:BuildRequires:	freetype1-devel}
+%{?with_sound:BuildRequires:	esound-devel}
+%{?with_freetype:BuildRequires:	freetype1-devel}
 BuildRequires:	gcc-c++
 BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.0.2-79
-%{!?_without_opengl:Requires:	OpenGL}
+%{?_with_opengl:Requires:	OpenGL}
 Requires:	pam >= 0.77.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -110,11 +110,11 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 	--without-gtk \
 	--without-nas \
 	--disable-setuid \
-	%{!?_with_sound:--without-rplay} \
-	%{!?_with_sound:--without-esound} \
-	%{?_with_sound:--with-esound} \
-	%{?_without_freetype:--without-ttf} \
-	%{?_without_opengl:--without-opengl --without-mesa} \
+	%{!?with_sound:--without-rplay} \
+	%{!?with_sound:--without-esound} \
+	%{?with_sound:--with-esound} \
+	%{!?with_freetype:--without-ttf} \
+	%{!?with_opengl:--without-opengl --without-mesa} \
 	--enable-vtlock \
 	--enable-pam
 %{__make}
@@ -123,7 +123,7 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements} \
 	$RPM_BUILD_ROOT{%{_mandir}/man1,%{_appdefsdir}}
-%{?_with_sound:install -d $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
+%{?with_sound:install -d $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -136,7 +136,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
 
-%{?_with_sound:install sounds/* $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
+%{?with_sound:install sounds/* $RPM_BUILD_ROOT%{_soundsdir}/%{name}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -149,4 +149,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{_appdefsdir}/XLock
 %{_applnkdir}/Amusements/xlockmore.desktop
-%{?_with_sound:%{_soundsdir}/%{name}}
+%{?with_sound:%{_soundsdir}/%{name}}
