@@ -24,7 +24,7 @@ X sessions.
 
 %prep
 %setup -q
-%patch -p1
+#%patch -p1
 
 %build
 %configure \
