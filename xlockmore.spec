@@ -8,8 +8,6 @@ Version:	5.00
 Release:	3
 License:	MIT
 Group:		X11/Amusements
-Group(de):	X11/Unterhaltung
-Group(pl):	X11/Rozrywka
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
