@@ -36,7 +36,7 @@ BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.0.2-79
 %{!?_without_opengl:Requires:	OpenGL}
 Requires:	fortune-mod
-Requires:	pam >= 0.67
+Requires:	pam >= 0.77.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
