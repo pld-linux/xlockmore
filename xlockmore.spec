@@ -9,7 +9,7 @@ Summary(pl):	Program do blokowania X terminali
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
 Version:	5.00
-Release:	5
+Release:	6
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
@@ -19,13 +19,14 @@ Patch0:		%{name}-Mesa.patch
 Patch1:		%{name}-sounds_path.patch
 Patch2:		%{name}-vtlock.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
+BuildRequires:	OpenGL-devel
+BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 %{?_with_sound:BuildRequires:	esound-devel}
 #BuildRequires:	freetype1-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	OpenGL-devel
 BuildRequires:	pam-devel
-BuildRequires:	XFree86-devel
+BuildRequires:	rpm-build >= 4.0.2-79
 Requires:	pam >= 0.67
 Requires:	fortune-mod
 Requires:	OpenGL
