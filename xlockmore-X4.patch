@@ -12,3 +12,14 @@
  extern int  dpmsstandby;
  extern int  dpmssuspend;
  extern int  dpmsoff;
+--- xlockmore-4.16.1/configure.in~	Thu Oct  5 16:01:54 2000
++++ xlockmore-4.16.1/configure.in	Thu Oct  5 20:41:27 2000
+@@ -2403,7 +2403,7 @@
+   AC_DEFINE(USE_DPMS)
+ dnl test needed for Digital Unix machines
+   if test "x$ac_dpms_libraries" != xNONE; then
+-    XLOCKLIBS="${XLOCKLIBS} -lXdpms"
++    XLOCKLIBS="${XLOCKLIBS}"
+   fi
+   test "x$dpms_includes" = xNONE && dpms_includes=$ac_dpms_includes
+   test "x$dpms_libraries" = xNONE && dpms_libraries=$ac_dpms_libraries
