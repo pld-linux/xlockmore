@@ -3,8 +3,8 @@ Summary(de):	Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
 Summary(fr):	Verrouillage de terminaux X
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
-Version:	4.16.1
-Release:	4
+Version:	4.17.2
+Release:	1
 Copyright:	MIT
 Group:		X11/Amusements
 Group(de):	X11/Unterhaltung
@@ -15,9 +15,10 @@ Source2:	%{name}.desktop
 Patch0:		%{name}-fortune.patch
 Patch1:		%{name}-Mesa.patch
 Patch2:		%{name}-X4.patch
+Patch3:		%{name}-sounds_path.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 BuildRequires:	autoconf
-BuildRequires:	esound-devel
+%{?sound:BuildRequires:	esound-devel}
 BuildRequires:	freetype-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	OpenGL-devel
@@ -62,6 +63,7 @@ kurcalamalarýný önleyebilirsiniz.
 #%patch0 -p1
 %patch1 -p0
 %patch2 -p1
+%patch3 -p1
 
 %build
 autoconf
@@ -71,12 +73,16 @@ CXXFLAGS="%{!?debug:$RPM_OPT_FLAGS -fno-rtti -fno-exceptions -fno-implicit-templ
 	--without-gtk \
 	--without-nas \
 	--disable-setuid \
+	%{!?sound:--without-rplay} \
+	%{!?sound:--without-esound} \
+	%{?sound:--with-esound} \
 	--enable-pam
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/}
+%{?sound:install -d $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -87,6 +93,8 @@ install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_applnkdir}/Amusements/}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/xlock
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Amusements
+
+%{?sound:install sounds/* $RPM_BUILD_ROOT%{_datadir}/sounds/%{name}}
 
 gzip -9nf docs/{TODO,Revisions}
 
@@ -101,3 +109,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{_libdir}/X11/app-defaults/XLock
 %{_applnkdir}/Amusements/xlockmore.desktop
+%{?sound:%{_datadir}/sounds/%{name}}
