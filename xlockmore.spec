@@ -66,7 +66,7 @@ kurcalamalarýný önleyebilirsiniz.
 
 %build
 autoconf
-CXXFLAGS="%{!?debug:$RPM_OPT_FLAGS -fno-rtti -fno-exceptions -fno-implicit-templates}%{?debug:-O -g}"
+CXXFLAGS="%{!?debug:$RPM_OPT_FLAGS -fno-rtti -fno-exceptions -fno-implicit-templates}%{?debug:-O0 -g}"
 %configure \
 	--without-motif \
 	--without-gtk \
