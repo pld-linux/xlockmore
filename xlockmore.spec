@@ -5,7 +5,7 @@ Summary(pl):	Program do blokowania X terminali
 Summary(tr):	X terminal kilitleme programý
 Name:		xlockmore
 Version:	5.00
-Release:	3
+Release:	4
 License:	MIT
 Group:		X11/Amusements
 Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.gz
