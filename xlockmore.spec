@@ -26,7 +26,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 %{?_with_sound:BuildRequires:	esound-devel}
 %{!?_without_freetype:BuildRequires:	freetype1-devel}
-BuildRequires:	libstdc++-devel
+BuildRequires:	gcc-c++
 BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.0.2-79
 %{!?_without_opengl:Requires:	OpenGL}
@@ -37,6 +37,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
+%define		__cxx		%{__cc}
 
 %description
 The xlockmore utility is an enhanced version of the standard xlock
