@@ -79,7 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%config /etc/pam.d/xlock
+%attr(644,root,root) %config %verify(not size mtime md5) /etc/pam.d/xlock
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
 %{_libdir}/X11/app-defaults/XLock
