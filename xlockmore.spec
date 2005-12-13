@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README docs/TODO docs/Revisions
-%attr(644,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/xlock
+%attr(644,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/xlock
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
 %{_appdefsdir}/XLock
