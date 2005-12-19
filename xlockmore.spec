@@ -1,3 +1,4 @@
+# TODO: kill /usr/X11R6 prefix (only _appdefsdir should stay now)
 #
 # Conditional build:
 %bcond_with	sound	# with sound support
@@ -34,7 +35,7 @@ BuildRequires:	gcc-c++
 BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.0.2-79
-%{?_with_opengl:Requires:	OpenGL}
+%{?with_opengl:Requires:	OpenGL}
 Requires:	pam >= 0.77.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -144,7 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README docs/TODO docs/Revisions
-%attr(644,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/xlock
+%config(noreplace) %verify(not md5 mtime size) /etc/pam.d/xlock
 %attr(755,root,root) %{_bindir}/xlock
 %{_mandir}/man1/*
 %{_appdefsdir}/XLock
