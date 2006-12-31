@@ -1,4 +1,3 @@
-# TODO: kill /usr/X11R6 prefix (only _appdefsdir should stay now)
 #
 # Conditional build:
 %bcond_with	sound	# with sound support
@@ -15,22 +14,26 @@ Summary(ru):	Программа локирования X терминала с множеством хранителей экрана
 Summary(tr):	X terminal kilitleme programЩ
 Summary(uk):	Програма локування X терм╕налу з великою к╕льк╕стю збер╕гач╕в екрану
 Name:		xlockmore
-Version:	5.12
-Release:	3
+Version:	5.23
+Release:	1
 License:	MIT
 Group:		X11/Amusements
-Source0:	ftp://ftp.tux.org/pub/tux/bagleyd/xlockmore/%{name}-%{version}.tar.bz2
-# Source0-md5:	f58758fa3757984edee42e141c7a80dc
+Source0:	http://www.tux.org/~bagleyd/latest/%{name}-%{version}.tar.bz2
+# Source0-md5:	bd962b1dfa55ede6137c100bde834ee1
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-sounds_path.patch
 Patch1:		%{name}-vtlock.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 %{?with_opengl:BuildRequires:	OpenGL-devel}
-BuildRequires:	XFree86-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXmu-devel
+BuildRequires:	xorg-lib-libXpm-devel
+BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	autoconf
 %{?with_sound:BuildRequires:	esound-devel}
-%{?with_freetype:BuildRequires:	freetype1-devel}
+%{?with_freetype:BuildRequires:	freetype-devel}
 BuildRequires:	gcc-c++
 BuildRequires:	libtool
 BuildRequires:	pam-devel
@@ -40,10 +43,9 @@ Requires:	pam >= 0.77.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
+
 %define		_soundsdir	/usr/share/sounds
-%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
+%define		_appdefsdir	%{_datadir}/X11/app-defaults
 %define		__cxx		%{__cc}
 
 %description
@@ -129,6 +131,7 @@ install -d $RPM_BUILD_ROOT{/etc/pam.d,%{_desktopdir}} \
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	bindir=$RPM_BUILD_ROOT%{_bindir} \
+	datadir=$RPM_BUILD_ROOT%{_datadir} \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	xapploaddir=$RPM_BUILD_ROOT%{_appdefsdir} \
 	INSTPGMFLAGS="-m 755"
@@ -146,8 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README docs/TODO docs/Revisions
 %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/xlock
-%attr(755,root,root) %{_bindir}/xlock
+%attr(755,root,root) %{_bindir}/x*lock
 %{_mandir}/man1/*
 %{_appdefsdir}/XLock
+%{_datadir}/xlock
 %{_desktopdir}/xlockmore.desktop
 %{?with_sound:%{_soundsdir}/%{name}}
