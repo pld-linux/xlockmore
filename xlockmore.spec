@@ -5,14 +5,14 @@
 %bcond_without	opengl	# without OpenGL mode(s)
 #
 Summary:	An X terminal locking program
-Summary(de):	Terminal-Sperrprogramm fЭr X mit vielen Bildschirmschonern
-Summary(es):	Programa para bloquear el terminal X con varios protectores de pantalla
-Summary(fr):	Verrouillage de terminaux X
-Summary(pl):	Program do blokowania X terminali
-Summary(pt_BR):	Programa para bloquear o terminal X com vАrios salvadores de tela
-Summary(ru):	Программа локирования X терминала с множеством хранителей экрана
-Summary(tr):	X terminal kilitleme programЩ
-Summary(uk):	Програма локування X терм╕налу з великою к╕льк╕стю збер╕гач╕в екрану
+Summary(de.UTF-8):   Terminal-Sperrprogramm fц╪r X mit vielen Bildschirmschonern
+Summary(es.UTF-8):   Programa para bloquear el terminal X con varios protectores de pantalla
+Summary(fr.UTF-8):   Verrouillage de terminaux X
+Summary(pl.UTF-8):   Program do blokowania X terminali
+Summary(pt_BR.UTF-8):   Programa para bloquear o terminal X com vц║rios salvadores de tela
+Summary(ru.UTF-8):   п÷я─п╬пЁя─п╟п╪п╪п╟ п╩п╬п╨п╦я─п╬п╡п╟п╫п╦я▐ X я┌п╣я─п╪п╦п╫п╟п╩п╟ я│ п╪п╫п╬п╤п╣я│я┌п╡п╬п╪ я┘я─п╟п╫п╦я┌п╣п╩п╣п╧ я█п╨я─п╟п╫п╟
+Summary(tr.UTF-8):   X terminal kilitleme programд╠
+Summary(uk.UTF-8):   п÷я─п╬пЁя─п╟п╪п╟ п╩п╬п╨я┐п╡п╟п╫п╫я▐ X я┌п╣я─п╪я√п╫п╟п╩я┐ п╥ п╡п╣п╩п╦п╨п╬я▌ п╨я√п╩я▄п╨я√я│я┌я▌ п╥п╠п╣я─я√пЁп╟я┤я√п╡ п╣п╨я─п╟п╫я┐
 Name:		xlockmore
 Version:	5.23
 Release:	1
@@ -54,50 +54,50 @@ program, which allows you to lock an X session so that other users
 can't access it. Xlockmore runs a provided screensaver until you type
 in your password.
 
-%description -l de
+%description -l de.UTF-8
 Eine erweiterte Version des Standardprogramms xlock, mit dem Sie eine
-X-Sitzung fЭr andere Benutzer sperren kЖnnen, wenn Sie sich nicht an
-Ihrem Rechner befinden. Es fЭhrt einen von vielen Bildschirmschonern
-aus und wartet auf die Eingabe eines Paъworts, bevor es die Sitzung
-freigibt und Sie an Ihre X-Programme lДъt.
+X-Sitzung fц╪r andere Benutzer sperren kц╤nnen, wenn Sie sich nicht an
+Ihrem Rechner befinden. Es fц╪hrt einen von vielen Bildschirmschonern
+aus und wartet auf die Eingabe eines Paц÷worts, bevor es die Sitzung
+freigibt und Sie an Ihre X-Programme lц╓ц÷t.
 
-%description -l es
-Una versiСn mejorada del xlock que te permite mantener otros usuarios
-lejos de tu sesiСn X mientras estАs alejado de la mАquina. Se ejecuta
+%description -l es.UTF-8
+Una versiцЁn mejorada del xlock que te permite mantener otros usuarios
+lejos de tu sesiцЁn X mientras estц║s alejado de la mц║quina. Se ejecuta
 en uno de los varios protectores de pantalla mientras aguarda que
-entres con tu contraseЯa, desbloqueando la sesiСn y volviendo al X.
+entres con tu contraseц╠a, desbloqueando la sesiцЁn y volviendo al X.
 
-%description -l fr
-Version amИliorИe du programme xlock standard et qui permet d'empЙcher
+%description -l fr.UTF-8
+Version amц╘liorц╘e du programme xlock standard et qui permet d'empц╙cher
 les autres utilisateurs d'aller dans une session X pendant que vous
-Йtes ИloignИ de la machine. Il lance l'un des nombreux Иconomiseurs
-d'Иcran et attend que vous tapiez votre mot de passe, dИbloquant la
-session et vous redonnant accХs Ю vos programmes X.
+ц╙tes ц╘loignц╘ de la machine. Il lance l'un des nombreux ц╘conomiseurs
+d'ц╘cran et attend que vous tapiez votre mot de passe, dц╘bloquant la
+session et vous redonnant accц╗s ц═ vos programmes X.
 
-%description -l pl
+%description -l pl.UTF-8
 xlockmore to rozszerzona wersja standardowego programu xlock,
-pozwalaj╠cego zablokowaФ sesjЙ X tak, by byЁa niedostЙpna dla innych
-u©ytkownikСw. Xlockmore uruchamia dostarczony wygaszacz ekranu do
-czasu wpisania hasЁa.
+pozwalajд┘cego zablokowaд┤ sesjд≥ X tak, by byе┌a niedostд≥pna dla innych
+uе╪ytkownikцЁw. Xlockmore uruchamia dostarczony wygaszacz ekranu do
+czasu wpisania hasе┌a.
 
-%description -l pt_BR
-Uma versЦo melhorada do xlock que permite a vocЙ manter outros
-usuАrios longe de sua sessЦo X enquanto vocЙ estА afastado da mАquina.
-Ele roda um dos vАrios protetores de tela enquanto aguarda vocЙ entrar
-com a sua senha, desbloqueando a sessЦo e voltando ao X.
+%description -l pt_BR.UTF-8
+Uma versцёo melhorada do xlock que permite a vocц╙ manter outros
+usuц║rios longe de sua sessцёo X enquanto vocц╙ estц║ afastado da mц║quina.
+Ele roda um dos vц║rios protetores de tela enquanto aguarda vocц╙ entrar
+com a sua senha, desbloqueando a sessцёo e voltando ao X.
 
-%description -l ru
-Улучшенная версия стандартной программы xlock, позволяющей закрыть
-X-сессию от других пользователей когда вы вдали от своей машины. Она
-запускает один из множества входящих в ее комплект скринсейверов и
-ждет пока не будет введен правильный пароль, по которому X-сессия
-опять открывается и пускает вас к вашим X-программам.
+%description -l ru.UTF-8
+пёп╩я┐я┤я┬п╣п╫п╫п╟я▐ п╡п╣я─я│п╦я▐ я│я┌п╟п╫п╢п╟я─я┌п╫п╬п╧ п©я─п╬пЁя─п╟п╪п╪я▀ xlock, п©п╬п╥п╡п╬п╩я▐я▌я┴п╣п╧ п╥п╟п╨я─я▀я┌я▄
+X-я│п╣я│я│п╦я▌ п╬я┌ п╢я─я┐пЁп╦я┘ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╧ п╨п╬пЁп╢п╟ п╡я▀ п╡п╢п╟п╩п╦ п╬я┌ я│п╡п╬п╣п╧ п╪п╟я┬п╦п╫я▀. п·п╫п╟
+п╥п╟п©я┐я│п╨п╟п╣я┌ п╬п╢п╦п╫ п╦п╥ п╪п╫п╬п╤п╣я│я┌п╡п╟ п╡я┘п╬п╢я▐я┴п╦я┘ п╡ п╣п╣ п╨п╬п╪п©п╩п╣п╨я┌ я│п╨я─п╦п╫я│п╣п╧п╡п╣я─п╬п╡ п╦
+п╤п╢п╣я┌ п©п╬п╨п╟ п╫п╣ п╠я┐п╢п╣я┌ п╡п╡п╣п╢п╣п╫ п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╟я─п╬п╩я▄, п©п╬ п╨п╬я┌п╬я─п╬п╪я┐ X-я│п╣я│я│п╦я▐
+п╬п©я▐я┌я▄ п╬я┌п╨я─я▀п╡п╟п╣я┌я│я▐ п╦ п©я┐я│п╨п╟п╣я┌ п╡п╟я│ п╨ п╡п╟я┬п╦п╪ X-п©я─п╬пЁя─п╟п╪п╪п╟п╪.
 
-%description -l tr
-Standart xlock programЩnЩn bir miktar geliЧtirilmiЧ sЭrЭmЭ. xlockmore
-ile makinanЩn baЧЩndan ayrЩlmanЩz gerektiПi zaman ekranЩ
-kilitleyebilir, bЖylece istenmeyen misafirlerin sistemi
-kurcalamalarЩnЩ Жnleyebilirsiniz.
+%description -l tr.UTF-8
+Standart xlock programд╠nд╠n bir miktar geliе÷tirilmiе÷ sц╪rц╪mц╪. xlockmore
+ile makinanд╠n baе÷д╠ndan ayrд╠lmanд╠z gerektiд÷i zaman ekranд╠
+kilitleyebilir, bц╤ylece istenmeyen misafirlerin sistemi
+kurcalamalarд╠nд╠ ц╤nleyebilirsiniz.
 
 %prep
 %setup -q
