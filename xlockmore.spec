@@ -5,14 +5,14 @@
 %bcond_without	opengl	# without OpenGL mode(s)
 #
 Summary:	An X terminal locking program
-Summary(de.UTF-8):   Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
-Summary(es.UTF-8):   Programa para bloquear el terminal X con varios protectores de pantalla
-Summary(fr.UTF-8):   Verrouillage de terminaux X
-Summary(pl.UTF-8):   Program do blokowania X terminali
-Summary(pt_BR.UTF-8):   Programa para bloquear o terminal X com vários salvadores de tela
-Summary(ru.UTF-8):   Программа локирования X терминала с множеством хранителей экрана
-Summary(tr.UTF-8):   X terminal kilitleme programı
-Summary(uk.UTF-8):   Програма локування X терміналу з великою кількістю зберігачів екрану
+Summary(de.UTF-8):	Terminal-Sperrprogramm für X mit vielen Bildschirmschonern
+Summary(es.UTF-8):	Programa para bloquear el terminal X con varios protectores de pantalla
+Summary(fr.UTF-8):	Verrouillage de terminaux X
+Summary(pl.UTF-8):	Program do blokowania X terminali
+Summary(pt_BR.UTF-8):	Programa para bloquear o terminal X com vários salvadores de tela
+Summary(ru.UTF-8):	Программа локирования X терминала с множеством хранителей экрана
+Summary(tr.UTF-8):	X terminal kilitleme programı
+Summary(uk.UTF-8):	Програма локування X терміналу з великою кількістю зберігачів екрану
 Name:		xlockmore
 Version:	5.23
 Release:	1
