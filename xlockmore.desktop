@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Xlock
 Comment=Screen Saver
 Comment[pl]=Wygaszacz ekranu
 Exec=/usr/X11R6/bin/xlock -mode random
-Icon=gnome-lockscreen.png
+Icon=gnome-lockscreen
 Terminal=false
 Type=Application
 Categories=Screensaver;
