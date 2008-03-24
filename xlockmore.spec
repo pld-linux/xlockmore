@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_with	sound	# with sound support
-%bcond_without	freetype	# without True Type Font mode(s)
+%bcond_without	freetype	# without TrueType Font mode(s)
 %bcond_without	opengl	# without OpenGL mode(s)
 #
 Summary:	An X terminal locking program
