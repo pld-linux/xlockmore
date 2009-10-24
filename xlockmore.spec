@@ -15,10 +15,10 @@ Summary(tr.UTF-8):	X terminal kilitleme programı
 Summary(uk.UTF-8):	Програма локування X терміналу з великою кількістю зберігачів екрану
 Name:		xlockmore
 Version:	5.29.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Amusements
-Source0:	http://www.tux.org/~bagleyd/latest/%{name}-%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://www.tux.org/~bagleyd/latest/xlockmore-%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	5492e1dd0eb2c1e2350c777f0e94d112
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
@@ -28,19 +28,19 @@ Patch2:		%{name}-makefile.patch
 Patch3:		%{name}-ftgl.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 %{?with_opengl:BuildRequires:	OpenGL-devel}
+BuildRequires:	autoconf
+%{?with_sound:BuildRequires:	esound-devel}
+%{?with_freetype:BuildRequires:	freetype-devel}
 %{?with_opengl:BuildRequires:	ftgl-devel}
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
+BuildRequires:	pam-devel
+BuildRequires:	rpm-build >= 4.0.2-79
+BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXmu-devel
 BuildRequires:	xorg-lib-libXpm-devel
-BuildRequires:	xorg-lib-libSM-devel
-BuildRequires:	autoconf
-%{?with_sound:BuildRequires:	esound-devel}
-%{?with_freetype:BuildRequires:	freetype-devel}
-BuildRequires:	gcc-c++
-BuildRequires:	libtool
-BuildRequires:	pam-devel
-BuildRequires:	rpm-build >= 4.0.2-79
 %{?with_opengl:Requires:	OpenGL}
 Requires:	pam >= 0.77.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -157,4 +157,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/x*lock
 %{_datadir}/xlock
 %{_desktopdir}/xlockmore.desktop
+%{_mandir}/man1/xlock.1*
+%{_appdefsdir}/XLock
 %{?with_sound:%{_soundsdir}/%{name}}
