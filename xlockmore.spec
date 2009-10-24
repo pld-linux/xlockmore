@@ -24,6 +24,7 @@ Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-sounds_path.patch
 Patch1:		%{name}-vtlock.patch
+Patch2:		%{name}-makefile.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 %{?with_opengl:BuildRequires:	OpenGL-devel}
 BuildRequires:	xorg-lib-libX11-devel
@@ -103,6 +104,7 @@ kurcalamalarını önleyebilirsiniz.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
