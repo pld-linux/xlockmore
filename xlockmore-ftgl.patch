@@ -1,0 +1,12 @@
+--- configure.in.orig	2009-10-24 03:09:27.388568403 +0100
++++ configure.in	2009-10-24 03:09:12.000000000 +0100
+@@ -1803,6 +1803,9 @@
+ fi
+ if test "x$ftgl_includes" != x && test "x$ftgl_includes" != xNONE ; then
+   XLOCKINC="${XLOCKINC} -I$ftgl_includes"
++  if test -r "$ftgl_includes/FTGL/ftgl.h"; then
++    AC_DEFINE(FTGL213)
++  fi
+ fi
+ 
+ freetype=no
