@@ -32,9 +32,11 @@ BuildRequires:	autoconf
 %{?with_sound:BuildRequires:	esound-devel}
 %{?with_freetype:BuildRequires:	freetype-devel}
 %{?with_opengl:BuildRequires:	ftgl-devel}
+BuildRequires:	gtk+2-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pam-devel
+BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.0.2-79
 BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
