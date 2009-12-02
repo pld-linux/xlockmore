@@ -26,6 +26,7 @@ Patch0:		%{name}-sounds_path.patch
 Patch1:		%{name}-vtlock.patch
 Patch2:		%{name}-makefile.patch
 Patch3:		%{name}-ftgl.patch
+Patch4:		%{name}-ldflags.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 %{?with_opengl:BuildRequires:	OpenGL-devel}
 BuildRequires:	autoconf
@@ -104,19 +105,35 @@ ile makinanın başından ayrılmanız gerektiği zaman ekranı
 kilitleyebilir, böylece istenmeyen misafirlerin sistemi
 kurcalamalarını önleyebilirsiniz.
 
+%package motif
+Summary:	Motif based frontend for xlockmore
+Group:		X11/Amusements
+Requires:	%{name} = %{version}-%{release}
+
+%description motif
+Motif based frontend for xlockmore.
+
+%package gtk
+Summary:	GTK based frontend for xlockmore
+Group:		X11/Amusements
+Requires:	%{name} = %{version}-%{release}
+
+%description gtk
+GTK based frontend for xlockmore.
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2
 %patch3
+%patch4 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
 %{__libtoolize}
 %{__autoconf}
 %configure \
-	--without-motif \
 	--without-gtk \
 	--without-nas \
 	--disable-setuid \
@@ -156,9 +173,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README docs/TODO docs/Revisions
 %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/xlock
-%attr(755,root,root) %{_bindir}/x*lock
-%{_datadir}/xlock
+%attr(755,root,root) %{_bindir}/xlock
 %{_desktopdir}/xlockmore.desktop
 %{_mandir}/man1/xlock.1*
 %{_appdefsdir}/XLock
 %{?with_sound:%{_soundsdir}/%{name}}
+
+%files motif
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/xmlock
+%{_appdefsdir}/XmLock
+
+%files gtk
+%defattr(644,root,root,755)
+%attr(755,root,root)%{_bindir}/xglock
+%{_datadir}/xlock
