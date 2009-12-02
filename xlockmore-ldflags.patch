@@ -1,0 +1,63 @@
+diff -ur xlockmore-5.29.1.orig/modes/Makefile.in xlockmore-5.29.1/modes/Makefile.in
+--- xlockmore-5.29.1.orig/modes/Makefile.in	2009-08-27 21:26:36.000000000 +0100
++++ xlockmore-5.29.1/modes/Makefile.in	2009-12-02 10:35:24.959540775 +0000
+@@ -330,6 +330,7 @@
+ XLOCKINC = -I. -I.. -I$(top_srcdir) -I$(UTILDIR) -I../.. @XLOCKINC@
+ CFLAGS = @CFLAGS@
+ CXXFLAGS = @CXXFLAGS@
++LDFLAGS = @LDFLAGS@
+ #CFLAGS = -O
+ #CFLAGS = -g
+ XLOCKLDFLAGS = @XLOCKLDFLAGS@ $(CHECKLDFLAG)
+@@ -429,7 +430,7 @@
+ xlock : $(UTILOBJDIR)xlock
+ 
+ $(UTILOBJDIR)xlock : $(XLOCKOBJS)
+-	$(PURIFY) $(CXX) $(CXXFLAGS) -o $@ $(XLOCKOBJS) $(XLOCKLDFLAGS) $(XLOCKLIBS) $(MODULEFLAGS)
++	$(PURIFY) $(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(XLOCKOBJS) $(XLOCKLDFLAGS) $(XLOCKLIBS) $(MODULEFLAGS)
+ 	@ $(ECHO) "$@ BUILD COMPLETE"
+ 	@ $(ECHO) ""
+ 
+Only in xlockmore-5.29.1/modes: Makefile.in~
+diff -ur xlockmore-5.29.1.orig/xglock/Makefile.in xlockmore-5.29.1/xglock/Makefile.in
+--- xlockmore-5.29.1.orig/xglock/Makefile.in	2008-02-25 16:30:06.000000000 +0000
++++ xlockmore-5.29.1/xglock/Makefile.in	2009-12-02 10:37:46.802016956 +0000
+@@ -89,6 +89,7 @@
+ DEFS = @DEFS@ $(DEFINES) -DXGLOCKRC_FILE=\"$(datadir)/xlock/xglockrc\"
+ XGLOCKINC = @XGLOCKINC@ -I.. -I$(top_srcdir)
+ CFLAGS = @GTK_CFLAGS@ @CFLAGS@
++LDFLAGS = @LDFLAGS@
+ #CFLAGS = -O
+ #CFLAGS = -g
+ XGLOCKLDFLAGS = @XGLOCKLDFLAGS@
+@@ -100,7 +101,7 @@
+ PURIFY = @PURIFY@
+ 
+ xglock : $(XGLOCKOBJS)
+-	$(PURIFY) $(CC) -o $@ $(XGLOCKOBJS) $(XGLOCKLDFLAGS) $(XGLOCKLIBS)
++	$(PURIFY) $(CC) $(LDFLAGS) -o $@ $(XGLOCKOBJS) $(XGLOCKLDFLAGS) $(XGLOCKLIBS)
+ 	@ $(ECHO) "$@ BUILD COMPLETE"
+ 	@ $(ECHO) ""
+ 
+Only in xlockmore-5.29.1/xglock: Makefile.in~
+diff -ur xlockmore-5.29.1.orig/xmlock/Makefile.in xlockmore-5.29.1/xmlock/Makefile.in
+--- xlockmore-5.29.1.orig/xmlock/Makefile.in	2008-02-25 16:25:58.000000000 +0000
++++ xlockmore-5.29.1/xmlock/Makefile.in	2009-12-02 10:38:25.385342119 +0000
+@@ -91,6 +91,7 @@
+ DEFS = @DEFS@ $(DEFINES)
+ XMLOCKINC = @XMLOCKINC@ -I.. -I$(top_srcdir)
+ CFLAGS = @CFLAGS@
++LDFLAGS = @LDFLAGS@
+ #CFLAGS = -O
+ #CFLAGS = -g
+ XMLOCKLDFLAGS = @XMLOCKLDFLAGS@
+@@ -102,7 +103,7 @@
+ PURIFY = @PURIFY@
+ 
+ xmlock : $(XMLOCKOBJS)
+-	$(PURIFY) $(CC) -o $@ $(XMLOCKOBJS) $(XMLOCKLDFLAGS) $(XMLOCKLIBS)
++	$(PURIFY) $(CC) $(LDFLAGS) -o $@ $(XMLOCKOBJS) $(XMLOCKLDFLAGS) $(XMLOCKLIBS)
+ 	@ $(ECHO) "$@ BUILD COMPLETE"
+ 	@ $(ECHO) ""
+ 
+Only in xlockmore-5.29.1/xmlock: Makefile.in~
