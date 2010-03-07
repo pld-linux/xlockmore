@@ -1,15 +1,16 @@
---- xlockmore-5.09/configure.in.orig	2003-03-10 16:24:55.000000000 +0100
-+++ xlockmore-5.09/configure.in	2003-07-22 08:38:28.000000000 +0200
-@@ -2629,11 +2629,7 @@
-     sound=yes
-     AC_DEFINE(USE_ESOUND)
-     AC_DEFINE(HAVE_LIBESD)
--    if test "x$prefix" = "xNONE"; then
--      AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "/usr/lib/X11/xlock/sounds/")
--    else
--      AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "${prefix}/lib/X11/xlock/sounds/")
--    fi
-+    AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "/usr/share/sounds/xlockmore/")
-     test "x$esound_config" = xNONE && esound_config=$ac_esound_config
-     test "x$esound_prefix" = xNONE && esound_prefix=$ac_esound_prefix
-     test "x$esound_includes" = xNONE && esound_includes=$ac_esound_includes
+diff -burNp xlockmore-5.30/configure.in xlockmore-5.30-dud/configure.in
+--- xlockmore-5.30/configure.in	2010-01-28 00:30:40.000000000 +0100
++++ xlockmore-5.30-dud/configure.in	2010-03-07 21:41:44.669461760 +0100
+@@ -3455,11 +3455,7 @@ else
+       sound=yes
+       AC_DEFINE(USE_ESOUND)
+       AC_DEFINE(HAVE_LIBESD)
+-      if test "x$prefix" = "xNONE"; then
+-	AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "/usr/lib/X11/xlock/sounds/")
+-      else
+-	AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "${prefix}/lib/X11/xlock/sounds/")
+-      fi
++      AC_DEFINE_UNQUOTED(DEFAULT_SOUND_DIR, "/usr/share/sounds/xlockmore/")
+       test "x$esound_config" = xNONE && esound_config=$ac_esound_config
+       test "x$esound_prefix" = xNONE && esound_prefix=$ac_esound_prefix
+       test "x$esound_includes" = xNONE && esound_includes=$ac_esound_includes
