@@ -36,6 +36,7 @@ BuildRequires:	autoconf
 BuildRequires:	gtk+2-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	motif-devel
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.0.2-79
