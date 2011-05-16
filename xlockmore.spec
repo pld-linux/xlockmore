@@ -14,12 +14,12 @@ Summary(ru.UTF-8):	Программа локирования X терминал�
 Summary(tr.UTF-8):	X terminal kilitleme programı
 Summary(uk.UTF-8):	Програма локування X терміналу з великою кількістю зберігачів екрану
 Name:		xlockmore
-Version:	5.30
+Version:	5.33
 Release:	1
 License:	MIT
 Group:		X11/Amusements
 Source0:	http://www.tux.org/~bagleyd/latest/xlockmore-%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	9eb133a1de2bbbf38b2ec02b90a9ae64
+# Source0-md5:	8ae31d03f836e768cd888198c5f1a5f8
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-sounds_path.patch
@@ -27,6 +27,7 @@ Patch1:		%{name}-vtlock.patch
 Patch2:		%{name}-makefile.patch
 Patch3:		%{name}-ftgl.patch
 Patch4:		%{name}-ldflags.patch
+Patch5:		%{name}-link.patch
 URL:		http://www.tux.org/~bagleyd/xlockmore.html
 %{?with_opengl:BuildRequires:	OpenGL-devel}
 BuildRequires:	autoconf
@@ -126,9 +127,10 @@ GTK based frontend for xlockmore.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2
-%patch3
+%patch2 -p0
+%patch3 -p0
 %patch4 -p1
+%patch5 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates"
