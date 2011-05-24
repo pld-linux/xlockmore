@@ -14,12 +14,12 @@ Summary(ru.UTF-8):	Программа локирования X терминал�
 Summary(tr.UTF-8):	X terminal kilitleme programı
 Summary(uk.UTF-8):	Програма локування X терміналу з великою кількістю зберігачів екрану
 Name:		xlockmore
-Version:	5.33
+Version:	5.34
 Release:	1
 License:	MIT
 Group:		X11/Amusements
 Source0:	http://www.tux.org/~bagleyd/latest/xlockmore-%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	8ae31d03f836e768cd888198c5f1a5f8
+# Source0-md5:	ed464197e8684a243e56aab7919a52d8
 Source1:	xlock.pamd
 Source2:	%{name}.desktop
 Patch0:		%{name}-sounds_path.patch
